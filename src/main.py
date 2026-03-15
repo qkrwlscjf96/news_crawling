@@ -22,6 +22,7 @@ if __name__ == "__main__":
 
     #검색어 입력
     search = input("검색할 키워드를 입력해주세요:")
+    
     #검색 시작할 페이지 입력
     page = int(input("\n크롤링할 시작 페이지를 입력해주세요. ex)1(숫자만입력):")) # ex)1 =1페이지,2=2페이지...
     print("\n크롤링할 시작 페이지: ",page,"페이지")   
@@ -41,20 +42,20 @@ if __name__ == "__main__":
         news_urls.extend(news_urls)
         news_titles.extend(news_titles)
 
-
-    print('news 개수: ',len(news_urls))
-
     #데이터 프레임 만들기
     news_df = pd.DataFrame({'title':news_titles,'link':news_urls})
-    print('news 개수: ',news_df.shape[0])
 
     #중복 행 지우기
     news_df = news_df.drop_duplicates(keep='first',ignore_index=True)
-    print("중복 제거 후 행 개수: ",news_df.shape[0])
-
+    print("뉴스 개수: ",news_df.shape[0])
+    
+    # 불용어 제거
+    news_df["title"] = news_df["title"].str.replace(search, "", regex=False) #검색어 제거
+    
     #wordcloud 만들기
     text = " ".join(news_df["title"].dropna())
 
+    
     wc = WordCloud(
         font_path="malgun.ttf",   # 한글 폰트 (Windows)
         width=800,

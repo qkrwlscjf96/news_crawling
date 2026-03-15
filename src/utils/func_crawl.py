@@ -25,7 +25,10 @@ def makeUrl(search, start_pg, end_pg):
             page = makePgNum(i)
             url = "https://search.naver.com/search.naver?where=news&sm=tab_pge&query=" + search + "&start=" + str(page)
             urls.append(url)
-        print("생성url: ", urls)
+            
+        for url in urls:
+            print(url)
+            
         return urls    
 
 
