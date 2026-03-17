@@ -14,6 +14,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
 from utils.func_crawl import *
+from utils.func_model import sentiment_analysis
 
 if __name__ == "__main__":
 
@@ -52,6 +53,20 @@ if __name__ == "__main__":
     # 불용어 제거
     news_df["title"] = news_df["title"].str.replace(search, "", regex=False) #검색어 제거
     
+    # KoBERT 감정 분석 (긍정/부정 예측)
+    print("\n감정 분석 중...")
+    sentiment_results = sentiment_analysis(news_df["title"].tolist())
+    
+    # 감정 분석 결과를 데이터프레임에 추가
+    news_df["positive_score"] = [result['positive'] for result in sentiment_results]
+    news_df["negative_score"] = [result['negative'] for result in sentiment_results]
+    news_df["sentiment"] = [result['sentiment'] for result in sentiment_results]
+    
+    print("\n감정 분석 완료!")
+    print(f"긍정: {(news_df['sentiment'] == '긍정').sum()}개")
+    print(f"부정: {(news_df['sentiment'] == '부정').sum()}개")
+    print(news_df[['title', 'sentiment', 'positive_score', 'negative_score']])
+
     #wordcloud 만들기
     text = " ".join(news_df["title"].dropna())
 
