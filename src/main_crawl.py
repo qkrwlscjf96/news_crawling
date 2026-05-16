@@ -6,10 +6,7 @@ ROOT = os.path.dirname(os.path.abspath(__file__))
 
 if ROOT not in sys.path:
     sys.path.insert(0, ROOT)
-
-#TODO 날짜랑 / 컨텐츠도 추가
-#TODO : 불용어 제거
-
+    
 import pandas as pd
 import matplotlib.pyplot as plt
 from wordcloud import WordCloud
