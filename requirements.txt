@@ -1,0 +1,15 @@
+# Python 3.12.10
+beautifulsoup4>=4.12,<5.0
+langchain>=0.3,<0.4
+langchain-core>=0.3,<0.4
+langchain-openai>=0.3,<0.4
+matplotlib>=3.9,<4.0
+openai>=1.0,<2.0
+pandas>=2.2,<3.0
+pyarrow>=17.0,<21.0
+pyparsing>=3.1,<4.0
+requests>=2.32,<3.0
+sentencepiece>=0.2,<0.3
+torch>=2.4,<3.0
+transformers>=4.44,<5.0
+wordcloud>=1.9,<2.0
